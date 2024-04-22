@@ -1,0 +1,190 @@
+# SYSTEM PACKAGES #
+sys-apps/portage native-extensions ipc # these are needed
+dev-lang/perl -minimal # you can't use perl installation scripts with minimal
+sys-devel/gcc nptl cxx # these are defaults for gcc
+sys-libs/glibc multiarch # this increases performance
+dev-libs/ncurses tinfo # needed to recognize terminal
+net-misc/dhcpcd embedded # for minimal dhcpcd
+app-arch/xz-utils extra-filters	# needed for kernel
+sys-firmware/intel-microcode split-ucode # needed for microcode
+sys-kernel/linux-firmware savedconfig redistributable compress-xz # needed for nvidia-firmware
+sys-kernel/gentoo-sources symlink experimental # needed to optimize for our cpu
+media-video/pipewire dbus pipewire-alsa sound-server # needed for sound to work
+sys-auth/seatd server # for wayland login
+sys-apps/util-linux abi_x86_32 su pam suid # for root login
+x11-drivers/nvidia-drivers abi_x86_32 driver modules static-libs # all of them needed
+sys-fs/ntfs3g fuse mount-ntfs # for external hdd
+sys-fs/fuse suid
+net-misc/curl http2 ssl openssl curl_ssl_openssl # for git sync
+dev-vcs/git curl # for git sync
+sys-apps/systemd-utils udev abi_x86_32 tmpfiles # dependency
+dev-libs/glib abi_x86_32 mime # not recommended to disable by package
+dev-lang/python ensurepip ssl sqlite ncurses # needed as dependency
+
+#STEAM
+games-util/steam-launcher desktop-portal steamruntime
+media-libs/fontconfig abi_x86_32
+sys-libs/libudev-compat abi_x86_32
+media-sound/apulse abi_x86_32
+media-libs/alsa-lib abi_x86_32
+dev-libs/libffi abi_x86_32
+dev-libs/expat abi_x86_32
+media-gfx/graphite2 abi_x86_32
+dev-libs/icu abi_x86_32
+dev-libs/lzo abi_x86_32
+x11-libs/pixman abi_x86_32
+x11-libs/libXrender abi_x86_32
+x11-libs/libXext abi_x86_32
+x11-libs/libX11 abi_x86_32
+x11-libs/libxcb abi_x86_32
+x11-libs/libXau abi_x86_32
+x11-libs/libXdmcp abi_x86_32
+virtual/libintl abi_x86_32
+virtual/libudev abi_x86_32
+sys-libs/libcap abi_x86_32
+virtual/libcrypt abi_x86_32
+sys-libs/libxcrypt abi_x86_32
+virtual/libiconv abi_x86_32
+virtual/opengl abi_x86_32
+dev-libs/wayland abi_x86_32
+x11-libs/libdrm abi_x86_32
+x11-libs/libxshmfence abi_x86_32
+x11-libs/libXxf86vm abi_x86_32
+x11-libs/libXfixes abi_x86_32
+x11-libs/xcb-util-keysyms abi_x86_32
+x11-libs/libXrandr abi_x86_32
+
+# DEFAULT APPS (these are default apps for Gentoo)#
+app-alternatives/awk gawk
+app-alternatives/bzip2 reference 
+app-alternatives/gzip reference 
+app-alternatives/sh bash 
+app-alternatives/tar gnu 
+app-alternatives/yacc bison 
+app-alternatives/lex flex
+app-alternatives/bc gnu 
+app-alternatives/cpio gnu 
+app-alternatives/ninja reference
+# FONT RENDERING (these are basically needed for all apps) #
+media-libs/freetype abi_x86_32 adobe-cff cleartype-hinting harfbuzz truetype png
+media-libs/harfbuzz abi_x86_32 glib icu truetype cairo graphite introspection
+
+# CLANG ENVIRONMENT (needed for compiling firefox or other PGO programs) #
+sys-devel/clang-runtime compiler-rt sanitize
+sys-devel/clang-common default-compiler-rt default-lld
+sys-libs/compiler-rt-sanitizers profile orc
+sys-libs/libunwind static-libs
+
+# FIX STUFF
+sys-apps/net-tools hostname #for hostname working
+sys-apps/coreutils kill #for fish shell to work
+
+# QEMU
+app-emulation/qemu gtk ncurses sdl spice usbredir pipewire udev usb vhost-net fdt seccomp numa
+app-emulation/qemu qemu_softmmu_targets_arm qemu_softmmu_targets_x86_64 qemu_softmmu_targets_sparc
+app-emulation/qemu qemu_user_targets_x86_64
+
+# LIBVIRT
+app-emulation/libvirt pcap virt-network numa fuse macvtap vepa qemu libvirtd udev
+net-dns/dnsmasq script ipv6 dhcp
+sys-apps/iproute2 -minimal
+
+# VIRT-MANAGER
+app-emulation/virt-manager gui
+sys-apps/dbus X
+app-emulation/libvirt-glib introspection
+
+#SWTPM
+net-libs/gnutls pkcs11 tools
+
+# SPOTIFY-PLAYER
+media-sound/spotify-player sixel image streaming lyrics
+# WAYBAR
+gui-apps/waybar -pipewire experimental tray
+dev-cpp/cairomm X
+dev-libs/libdbusmenu gtk3
+
+# WORLD PACKAGES #
+
+# neovim uses luajit by default so we select it#
+app-editors/neovim lua_single_target_luajit
+dev-lua/luv lua_single_target_luajit -lua_single_target_lua5-4
+dev-lua/mpack lua_targets_luajit lua_single_target_luajit
+dev-lua/lpeg lua_targets_luajit lua_single_target_luajit
+dev-lua/lua-cjson internal-fpconv
+
+# packages we install # 
+sys-apps/xdg-desktop-portal screencast
+media-gfx/imv freeimage jpeg png
+media-libs/freeimage webp
+media-sound/mpd ffmpeg
+media-video/ffmpeg network openssl dav1d vpx opus encode libass sdl x264 gpl X pulseaudio
+media-libs/libvpx postproc highbitdepth
+media-libs/dav1d 10bit 8bit
+media-video/mpv cli -vulkan egl libplacebo lua nvenc rubberband uchardet iconv lua_single_target_luajit
+media-libs/libplacebo -vulkan opengl # opengl is better with mpv
+net-vpn/openvpn openssl
+net-p2p/qbittorrent qt6 gui
+net-libs/libtorrent-rasterbar dht
+media-gfx/imagemagick corefonts truetype jpeg opencl pango png webp
+www-client/firefox llvm_slot_17 eme-free jumbo-build openh264 dbus
+app-office/libreoffice gtk dbus 
+media-sound/ncmpcpp taglib
+net-vpn/openvpn openssl
+
+# required use flags for our setup #
+# these are added because portage wants them enabled #
+# because we enabled other things above #
+mail-client/neomutt notmuch sasl
+net-mail/isync ssl
+sys-auth/polkit kde daemon # without these you can't build kde apps or breeze
+x11-libs/gtk+ -X introspection
+dev-libs/libpcre2 abi_x86_32 unicode pcre16 pcre32
+dev-libs/libtomcrypt tomsfastmath
+# all of qt packages are needed for hyprland and xdg-portal #
+dev-qt/qtbase concurrent gui egl eglfs libinput udev opengl widgets network dbus ssl xml sql sqlite
+dev-qt/qtgui egl eglfs dbus libinput udev png X
+dev-qt/qtnetwork ssl
+dev-qt/qtsql sqlite
+dev-qt/qtwidgets png
+dev-qt/qtdeclarative widgets opengl sql
+dev-qt/qtcore icu
+dev-qt/qttools linguist llvm_slot_18
+media-libs/libglvnd X abi_x86_32
+x11-libs/cairo abi_x86_32 X glib
+x11-libs/pango X introspection
+app-text/xmlto text
+app-accessibility/at-spi2-core introspection
+media-libs/libepoxy X egl
+x11-libs/gdk-pixbuf introspection
+media-libs/libass fontconfig
+media-libs/libsdl2 haptic joystick sound video opengl gles2 X
+media-libs/mesa gles2 X abi_x86_32
+dev-libs/boost zlib nls icu
+media-libs/lsp-plugins lv2
+dev-libs/libxml2 python
+dev-libs/gmime crypt
+media-gfx/qrencode png
+app-arch/libarchive zstd bzip2
+kde-frameworks/kconfig qml dbus
+kde-frameworks/kglobalaccel X
+kde-frameworks/kwindowsystem X
+kde-frameworks/kitemmodels qml
+sys-libs/libblockdev cryptsetup
+x11-libs/libxkbcommon X
+sys-fs/cryptsetup openssl
+media-libs/mlt xml qt5 frei0r sdl ffmpeg
+media-fonts/fontawesome otf
+app-crypt/gpgme cxx
+app-text/libwpd tools
+dev-libs/xmlsec nss
+media-libs/libpng apng abi_x86_32
+media-libs/openh264 plugin
+net-libs/nodejs icu ssl
+gui-libs/wlroots tinywl
+dev-lang/ruby ssl
+app-crypt/gcr gtk
+dev-lang/spidermonkey -clang
+net-im/telegram-desktop fonts qt6 jemalloc
+media-libs/libtgvoip alsa
+sys-libs/zlib minizip
